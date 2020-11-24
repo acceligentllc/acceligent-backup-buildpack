@@ -4,13 +4,9 @@
 # fail fast
 set -e
 
-# debug
-# set -x
-
 # clean up leaking environment
 unset GIT_DIR
 
-# config
 AWS_CLI_URL="https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
 
 # parse and derive params
@@ -26,10 +22,9 @@ unzip -qq -d "$BUILD_DIR/vendor" /tmp/awscli-bundle.zip
 
 echo "-----> adding installer script into app/.profile.d"
 mkdir -p $BUILD_DIR/.profile.d
-cp "$BUILDPACK_DIR/scripts/install_awscli.sh" $BUILD_DIR/.profile.d/
+cp "$BUILDPACK_DIR/bin/install_awscli.sh" $BUILD_DIR/.profile.d/
 chmod +x $BUILD_DIR/.profile.d/install_awscli.sh
 
-#clean
 rm -rf /tmp/awscli*
 
 echo "-----> aws cli installation done"
@@ -39,6 +34,7 @@ if [ ! -d "vendor" ]; then
 fi
 
 echo "-----> Add backup script to app/vendor"
-cp "$BUILDPACK_DIR/scripts/backup.sh" $BUILD_DIR/vendor/
+
+cp "$BUILDPACK_DIR/backup.sh" $BUILD_DIR/vendor/
 
 echo "-----> backup script moved"

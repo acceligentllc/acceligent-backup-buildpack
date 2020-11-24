@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DBNAME=""
+DBNAME=$POSTGRES_DBNAME
 Green='\033[0;32m'
 EC='\033[0m' 
 FILENAME=`date +%H_%M_%d%m%Y`
@@ -56,7 +56,7 @@ fi
 
 printf "${Green}Start dump${EC}"
 
-time pg_dump -b -F c --dbname=$POSTGRES_USERNAME:$POSTGRES_PASSWORD@$POSTGRES_HOST/$POSTGRES_DBNAME | gzip >  /tmp/"${DBNAME}_${FILENAME}".gz
+time pg_dump -b -F c --dbname=postgres://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@$POSTGRES_HOST:5432/$POSTGRES_DBNAME | gzip >  /tmp/"${DBNAME}_${FILENAME}".gz
 
 printf "${Green}Move dump to AWS${EC}"
 time /app/vendor/awscli/bin/aws s3 cp /tmp/"${DBNAME}_${FILENAME}".gz s3://$AWS_S3_BUCKET_NAME/backup/"${DBNAME}_${FILENAME}".gz

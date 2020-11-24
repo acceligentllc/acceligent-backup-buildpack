@@ -1,8 +1,2 @@
 #!/usr/bin/env bash
 # bin/release <build-dir>
-
-#This script returns a YAML formatted hash with two keys:
-# 1 - addons is a list of default addons to install.
-# 2 - default_process_types is a hash of default Procfile entries.
-
-#This script will only be run if present.

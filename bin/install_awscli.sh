@@ -14,5 +14,5 @@ EOF
 
 cat >> ~/.aws/config << EOF 
 [default]
-region = $AWS_S3_REGION
+region = $AWS_REGION
 EOF
