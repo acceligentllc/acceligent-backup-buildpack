@@ -33,12 +33,12 @@ rm -rf "${TMP_DIR}"
 
 echo "-----> Successfully installed AWS CLI"
 
-if [ ! -d "vendor" ]; then
-	mkdir -p vendor
+if [ ! -d "/app/vendor" ]; then
+	mkdir -p /app/vendor
 fi
 
 echo "-----> Add backup script to app/vendor"
 
-cp "$BUILDPACK_DIR/backup.sh" $BUILD_DIR/vendor/
+cp "$BUILDPACK_DIR/backup.sh" /app/vendor/
 
 echo "-----> backup script moved"
