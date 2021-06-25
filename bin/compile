@@ -24,6 +24,7 @@ mkdir -p "${BUILD_DIR}/.awscli"
 if [[ "${BUILD_DIR}" != /app ]]; then
   mkdir -p /app
   ln -nsf "${BUILD_DIR}/.awscli" "${INSTALL_DIR}"
+  ln -nsf "${BUILD_DIR}/vendor" /app/vendor
 fi
 
 "${TMP_DIR}/aws/install" --install-dir "${INSTALL_DIR}/aws-cli" --bin-dir "${INSTALL_DIR}/bin"
@@ -35,8 +36,8 @@ echo "-----> Successfully installed AWS CLI"
 
 echo "-----> Add backup script to app/vendor"
 
-mkdir -p /app/vendor
-cp "$BUILDPACK_DIR/backup.sh" /app/vendor
+mkdir -p "${BUILD_DIR}/vendor"
+cp "$BUILDPACK_DIR/backup.sh" $BUILD_DIR/vendor
 
 echo "-----> backup script moved"
 
