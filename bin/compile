@@ -33,12 +33,16 @@ rm -rf "${TMP_DIR}"
 
 echo "-----> Successfully installed AWS CLI"
 
-if [ ! -d "/app/vendor" ]; then
-	mkdir -p /app/vendor
-fi
-
 echo "-----> Add backup script to app/vendor"
 
-cp "$BUILDPACK_DIR/backup.sh" /app/vendor/
+mkdir -p /app/vendor
+cp "$BUILDPACK_DIR/backup.sh" /app/vendor
 
 echo "-----> backup script moved"
+
+echo "-----> adding installer script into app/.profile.d"
+mkdir -p $BUILD_DIR/.profile.d
+cp "$BUILDPACK_DIR/profile.sh" $BUILD_DIR/.profile.d
+chmod +x $BUILD_DIR/.profile.d/profile.sh
+
+echo "-----> aws cli installation done"
