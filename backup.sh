@@ -59,7 +59,7 @@ printf "${Green}Start dump to /tmp/${DBNAME}_${FILENAME} ${EC}"
 time pg_dump -b -F c --dbname=postgres://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@$POSTGRES_HOST:5432/$POSTGRES_DBNAME | gzip >  /tmp/"${DBNAME}_${FILENAME}".gz
 
 printf "${Green}Move dump to AWS $AWS_S3_BUCKET_NAME ${EC}"
-time aws s3 cp /tmp/"${DBNAME}_${FILENAME}".gz s3://$AWS_S3_BUCKET_NAME/backup/"${DBNAME}_${FILENAME}".gz
+time aws s3 cp /tmp/"${DBNAME}_${FILENAME}".gz s3://${AWS_S3_BUCKET_NAME}/backup/"${DBNAME}_${FILENAME}".gz
 
 # remove temp file
 rm -rf /tmp/"${DBNAME}_${FILENAME}".gz
