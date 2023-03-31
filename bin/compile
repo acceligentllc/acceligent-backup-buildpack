@@ -47,3 +47,15 @@ cp "$BUILDPACK_DIR/profile.sh" $BUILD_DIR/.profile.d
 chmod +x $BUILD_DIR/.profile.d/profile.sh
 
 echo "-----> aws cli installation done"
+
+echo "-----> installing NewRelic"
+
+curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash
+
+NEW_RELIC_API_KEY=NRAK-CCDI3RCXTCIPI5G4ZDTL4QIN5Z7 NEW_RELIC_ACCOUNT_ID=2172356 /usr/local/bin/newrelic install -n postgres-open-source-integration
+NEW_RELIC_API_KEY=NRAK-CCDI3RCXTCIPI5G4ZDTL4QIN5Z7 NEW_RELIC_ACCOUNT_ID=2172356 /usr/local/bin/newrelic install -n redis-open-source-integration
+NEW_RELIC_API_KEY=NRAK-CCDI3RCXTCIPI5G4ZDTL4QIN5Z7 NEW_RELIC_ACCOUNT_ID=2172356 /usr/local/bin/newrelic install -n rabbitmq-open-source-integration
+NEW_RELIC_API_KEY=NRAK-CCDI3RCXTCIPI5G4ZDTL4QIN5Z7 NEW_RELIC_ACCOUNT_ID=2172356 /usr/local/bin/newrelic install -n mongodb-open-source-integration
+NEW_RELIC_API_KEY=NRAK-CCDI3RCXTCIPI5G4ZDTL4QIN5Z7 NEW_RELIC_ACCOUNT_ID=2172356 /usr/local/bin/newrelic install -n node-agent-installer
+
+echo "-----> done installing NewRelic"
