@@ -11,7 +11,6 @@ unset GIT_DIR
 AWS_CLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.13.33.zip"
 
 BUILD_DIR=$1
-ENV_DIR=$3
 BUILDPACK_DIR="$(dirname $(dirname $0))"
 INSTALL_DIR="/app/.awscli"
 TMP_DIR=$(mktemp -d)
@@ -49,24 +48,3 @@ cp "$BUILDPACK_DIR/profile.sh" $BUILD_DIR/.profile.d
 chmod +x $BUILD_DIR/.profile.d/profile.sh
 
 echo "-----> aws cli installation done"
-
-
-echo "-----> testing libreoffice"
-mkdir -p ~/.aws
-
-cat > ~/.aws/credentials << EOF
-[default]
-aws_access_key_id = $(cat $ENV_DIR/AWS_S3_ACCESS_KEY)
-aws_secret_access_key = $(cat $ENV_DIR/AWS_S3_SECRET)
-EOF
-
-cat > ~/.aws/config << EOF 
-[default]
-region = $(cat $ENV_DIR/AWS_REGION)
-EOF
-
-export PATH="/app/.awscli/bin:${PATH}"
-
-aws s3 sync s3://libreoffice7342 ~/libreoffice/
-
-echo "-----> testing libreoffice done"
